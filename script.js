@@ -302,12 +302,12 @@ agents.forEach(agent => {
      */
 
 // Lightning Exercise 4: Refactor your code to search for purchasing agents instead. If the search text is found in the first name of any purchasing agent, show that agent.
-
+/* 
 document
     .querySelector("#companySearch")
     .addEventListener("keypress", keyPressEvent => {
             if (keyPressEvent.charCode === 13) {
-                /* WHEN  USER PRESSES ENTER, FIND MATCHING BUSINESS */
+                //  WHEN  USER PRESSES ENTER, FIND MATCHING BUSINESS
                 const foundBusiness = businesses.find(business => {
                      return business.purchasingAgent.nameFirst.includes(keyPressEvent.target.value);
                      
@@ -331,3 +331,65 @@ document
             `;
         }
     });
+     */
+
+// Lightning Exercise 2: Refactor your code so that if the search text is found in the first name, or last name, of any purchasing agent, show that agent.
+/* 
+document
+    .querySelector("#companySearch")
+    .addEventListener("keypress", keyPressEvent => {
+        if (keyPressEvent.charCode === 13) {
+            //  WHEN  USER PRESSES ENTER, FIND MATCHING BUSINESS
+
+            const foundBusiness = businesses.find(business => {
+
+                if (business.purchasingAgent.nameFirst.includes(keyPressEvent.target.value)) {
+                    return business;
+                } else if (business.purchasingAgent.nameLast.includes(keyPressEvent.target.value)){
+                    return business;
+                }
+
+            });
+            outEl.innerHTML = `
+            <h2>${foundBusiness.purchasingAgent.nameFirst} ${foundBusiness.purchasingAgent.nameLast}</h2>
+                <h2>
+                ${foundBusiness.companyName}
+                </h2>
+                
+                <section>
+                ${foundBusiness.addressFullStreet}
+                
+                </section>
+                <section>
+                ${foundBusiness.addressCity},
+                ${foundBusiness.addressStateCode}
+                ${foundBusiness.addressZipCode}
+                </section>
+            `;
+        }
+    }); 
+    */
+
+/**************************************************************************/
+// REDUCE METHOD
+/* 
+businesses.forEach(business => {
+    // CALCULATE ORDER SUMMARY 
+    let totalOrders = business.orders.reduce(
+        (currentTotal, nextValue) => currentTotal += nextValue,
+        0
+    );
+
+    outEl.innerHTML += `
+    <h2>${business.companyName}</h2>
+    <section>
+      ${business.addressFullStreet}
+    </section>
+    <section>
+        ${business.addressCity}, ${business["addressStateCode"]} ${business["addressZipCode"]}
+    </section>
+    <h2>${totalOrders}</h2>`;
+    console.log(totalOrders);
+
+});
+ */
