@@ -116,7 +116,7 @@ outEl.innerHTML = "<h1>Active Businesses</h1>"
 
 // Lightning Exercise 1: Add another section sibling to the current one and use object dot notation to display each company's city. Use square bracket notation to display the state code. Use dynamic square bracket notation to add the zip code.
 
-businesses.forEach(business => {
+/* businesses.forEach(business => {
   outEl.innerHTML += `
     <h2>${business.companyName}</h2>
     <section>
@@ -127,5 +127,29 @@ businesses.forEach(business => {
     </section>
   `
   outEl.innerHTML += "<hr/>"
-});
+}); */
 
+
+// Array to contain all the New York businesses
+const newYorkBusinesses = businesses.filter(business => {
+    let inNewYork = false;
+  
+    if (business.addressStateCode === "NY") {
+        inNewYork = true;
+    }
+  
+    return inNewYork;
+  });
+
+  newYorkBusinesses.forEach(business => {
+    outEl.innerHTML += `
+      <h2>${business.companyName}</h2>
+      <section>
+        ${business.addressFullStreet}
+      </section>
+      <section>
+          ${business.addressCity}, ${business["addressStateCode"]} ${business["addressZipCode"]}
+      </section>
+    `;
+    outEl.innerHTML += "<hr/>";
+  });
