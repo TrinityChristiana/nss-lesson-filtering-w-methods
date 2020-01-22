@@ -274,11 +274,10 @@ agents.forEach(agent => {
 /**************************************************************************/
 // FIND METHOD
 
-document
+/* document
     .querySelector("#companySearch")
     .addEventListener("keypress", keyPressEvent => {
             if (keyPressEvent.charCode === 13) {
-                /* WHEN  USER PRESSES ENTER, FIND MATCHING BUSINESS */
                 const foundBusiness = businesses.find(business => {
                      return business.companyName.includes(keyPressEvent.target.value);
                      
@@ -291,6 +290,38 @@ document
                 <section>
                 ${foundBusiness.addressFullStreet}
 
+                </section>
+                <section>
+                ${foundBusiness.addressCity},
+                ${foundBusiness.addressStateCode}
+                ${foundBusiness.addressZipCode}
+                </section>
+            `;
+        }
+    });
+     */
+
+// Lightning Exercise 4: Refactor your code to search for purchasing agents instead. If the search text is found in the first name of any purchasing agent, show that agent.
+
+document
+    .querySelector("#companySearch")
+    .addEventListener("keypress", keyPressEvent => {
+            if (keyPressEvent.charCode === 13) {
+                /* WHEN  USER PRESSES ENTER, FIND MATCHING BUSINESS */
+                const foundBusiness = businesses.find(business => {
+                     return business.purchasingAgent.nameFirst.includes(keyPressEvent.target.value);
+                     
+                }
+            );
+            outEl.innerHTML = `
+            <h2>${foundBusiness.purchasingAgent.nameFirst} ${foundBusiness.purchasingAgent.nameLast}</h2>
+                <h2>
+                ${foundBusiness.companyName}
+                </h2>
+                
+                <section>
+                ${foundBusiness.addressFullStreet}
+                
                 </section>
                 <section>
                 ${foundBusiness.addressCity},
